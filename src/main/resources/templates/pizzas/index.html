@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <!-- <div th:replace="~{fragments :: navbar}"></div> -->
+    </header>
+    <main class="container">
+        <h1>La Mia Pizzeria</h1>
+        <section class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Nome</th>
+                            <!-- <th scope="col">Descrizione</th> -->
+                            <th scope="col">Prezzo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="pizza : ${pizzas}">
+                            <td th:text="${pizza.id}"></td>
+                            <td th:text="${pizza.nome}"></td>
+                            <!-- <td th:text="${pizza.description}"></td> -->
+                            <td th:text="${pizza.prezzo}"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

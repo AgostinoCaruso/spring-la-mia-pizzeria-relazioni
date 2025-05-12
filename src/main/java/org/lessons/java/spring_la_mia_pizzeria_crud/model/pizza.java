@@ -10,9 +10,11 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "pizzas")
-public class pizza {
+public class Pizza {
 
-    public pizza(Integer id, String nome, String immagine, float prezzo) {
+    public Pizza() {
+    }
+    public Pizza(Integer id, String nome, String immagine, float prezzo) {
         this.id = id;
         this.nome = nome;
         this.immagine = immagine;
@@ -29,7 +31,7 @@ public class pizza {
     private String immagine;
     @NotNull
     private float prezzo;
-    
+
     public Integer getId() {
         return this.id;
     }
@@ -60,6 +62,11 @@ public class pizza {
     
     public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Pizza nome %s, prezzo: %s", nome, prezzo);
     }
 }
 
