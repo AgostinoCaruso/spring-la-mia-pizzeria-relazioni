@@ -12,7 +12,13 @@
         <!-- <div th:replace="~{fragments :: navbar}"></div> -->
     </header>
     <main class="container">
-        <h1>La Mia Pizzeria</h1>
+        <div class="row">
+            <h1 class="col-4">La Mia Pizzeria</h1>
+            <form th:action="@{/pizzas}" method="get">
+                <input class="col-8" type="text" name="ricerca" th:value="${ricerca}" placeholder="Cerca per nome..." />
+                <button type="submit">Cerca</button>
+            </form>
+        </div>
         <section class="row">
             <div class="col-12">
                 <table class="table" th:if="${pizzas.size() > 0}">
@@ -22,6 +28,7 @@
                             <th scope="col">Nome</th>
                             <th scope="col">Immagine</th>
                             <th scope="col">Prezzo</th>
+                            <th scope="col">Dettagli</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,6 +40,9 @@
                                     style="max-width: 150px;" />
                             </td>
                             <td th:text="*{prezzo}"></td>
+                            <td>
+                                <a th:href="@{/pizzas/{id}(id=*{id})}" class="btn btn-primary">Dettagli</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
