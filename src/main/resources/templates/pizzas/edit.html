@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <!-- <div th:replace="~{fragments :: navbar}"></div> -->
+    </header>
+    <main class="container">
+        <div class="mb-3 mt-3">
+            <a th:href="@{/pizzas}" class="btn btn-primary">Torna alla lista</a>
+        </div>
+        <h1>Aggiorna la [[${pizza.nome}]]</h1>
+        <form th:action="@{/pizzas/edit/{id} (id=${pizza.id})}" method="post" th:object="${pizza}">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}"
+                    th:errorClass="is-invalid" />
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}">
+                    <ul>
+                        <li th:each="error: ${#fields.errors('nome')}" th:text="${error}"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="immagine" class="form-label">Immagine</label>
+                <input type="text" class="form-control" id="immagine" name="immagine" th:field="*{immagine}" th:errorClass="is-invalid"/>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('immagine')}">
+                    <ul>
+                        <li th:each="error: ${#fields.errors('immagine')}" th:text="${error}"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="prezzo" class="form-label">Prezzo</label>
+                <input type="number" step="0.01" class="form-control" id="prezzo" name="prezzo" th:field="*{prezzo}" th:errorClass="is-invalid"/>
+                <div class="invalid-feedback" th:if="${#fields.hasErrors('prezzo')}">
+                    <ul>
+                        <li th:each="error: ${#fields.errors('prezzo')}" th:text="${error}"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Aggiorna la pizza</button>
+                <button type="reset" class="btn btn-warning">Resetta i campi</button>
+            </div>
+    </main>
+</body>
+
+</html>
