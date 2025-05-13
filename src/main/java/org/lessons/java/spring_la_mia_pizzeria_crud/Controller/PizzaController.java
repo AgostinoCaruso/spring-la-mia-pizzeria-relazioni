@@ -2,8 +2,6 @@ package org.lessons.java.spring_la_mia_pizzeria_crud.Controller;
 
 import java.util.List;
 
-import javax.naming.Binding;
-
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
