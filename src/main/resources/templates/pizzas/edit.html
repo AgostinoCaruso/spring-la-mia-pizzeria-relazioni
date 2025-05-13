@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
-    <title>Document</title>
+    <title>Pizzeria</title>
 </head>
 
 <body>
@@ -49,6 +49,7 @@
                 <button type="submit" class="btn btn-primary">Aggiorna la pizza</button>
                 <button type="reset" class="btn btn-warning">Resetta i campi</button>
             </div>
+            <div th:replace="~{fragments :: footer}"></div>
     </main>
 </body>
 
