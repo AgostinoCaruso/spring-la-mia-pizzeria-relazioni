@@ -13,11 +13,16 @@
     </header>
     <main class="container">
         <div class="row">
-            <h1 class="col-4">La Mia Pizzeria</h1>
-            <form th:action="@{/pizzas}" method="get">
-                <input class="col-8" type="text" name="ricerca" th:value="${ricerca}" placeholder="Cerca per nome..." />
+            <div class="col-4">
+                <h1 >La Mia Pizzeria</h1>
+            </div>
+            <form class="col-4 mt-3" th:action="@{/pizzas}" method="get">
+                <input  type="text" name="ricerca" th:value="${ricerca}" placeholder="Cerca per nome..." />
                 <button type="submit">Cerca</button>
             </form>
+            <div class="col-4 mt-1">
+                <a th:href="@{/pizzas/create}" class="btn btn-primary mt-3">Crea una nuova pizza</a>
+            </div>
         </div>
         <section class="row">
             <div class="col-12">

@@ -27,9 +27,9 @@ public class Pizza {
 
     @NotBlank(message = "Il nome non può essere vuoto")
     private String nome;
-    @NotBlank
+    @NotBlank(message = "L'immagine non può essere vuota")
     private String immagine;
-    @NotNull
+    @NotNull(message = "Il prezzo non può essere minore di 0")
     private float prezzo;
 
     public Integer getId() {
