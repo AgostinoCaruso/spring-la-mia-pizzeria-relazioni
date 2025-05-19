@@ -36,6 +36,7 @@
                             <th scope="col"></th>
                             <th scope="col"></th>
                             <th scope="col"></th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,8 +47,11 @@
                                 <img th:src="*{immagine}" alt="Immagine pizza" class="img-fluid"
                                     style="max-width: 150px;" />
                             </td>
-                            
+
                             <td><span th:text="*{prezzo}"> </span> €</td>
+                            <td>
+                                <a th:href="@{/pizzas/{id}/scontiPizza(id=*{id})}" class="btn btn-outline-primary">Sconti</a>
+                            </td>
                             <td>
                                 <a th:href="@{/pizzas/{id}(id=*{id})}" class="btn btn-success">Dettagli</a>
                             </td>
@@ -74,7 +78,7 @@
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                Sei sicuro di voler eliminare la pizza 
+                                                Sei sicuro di voler eliminare la pizza
                                                 <strong>[[${pizza.nome}]]</strong>?
                                             </div>
                                             <div class="modal-footer">

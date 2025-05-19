@@ -1,11 +1,14 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.model;
 
+import java.util.List;
+
 import org.hibernate.validator.constraints.UniqueElements;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -68,6 +71,17 @@ public class Pizza {
     
     public void setPrezzo(float prezzo) {
         this.prezzo = prezzo;
+    }
+
+    @OneToMany(mappedBy = "pizza")
+    private List<ScontiPizza> scontiPizzas;
+
+    public List<ScontiPizza> getScontiPizzas() {
+        return this.scontiPizzas;
+    }
+
+    public void setScontiPizzas(List<ScontiPizza> scontiPizzas) {
+        this.scontiPizzas = scontiPizzas;
     }
 
     @Override

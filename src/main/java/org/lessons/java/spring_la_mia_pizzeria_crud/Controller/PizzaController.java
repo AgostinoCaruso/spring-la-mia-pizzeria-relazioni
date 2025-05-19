@@ -3,6 +3,7 @@ package org.lessons.java.spring_la_mia_pizzeria_crud.Controller;
 import java.util.List;
 
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
+import org.lessons.java.spring_la_mia_pizzeria_crud.model.ScontiPizza;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,13 +24,13 @@ public class PizzaController {
 
     @Autowired
     private PizzaRepository repository;
-    
+
     @GetMapping
     public String index(@RequestParam(name = "ricerca", required = false) String ricerca, Model model) {
         List<Pizza> pizzas;
         if (ricerca != null && !ricerca.isEmpty()) {
             pizzas = repository.findByNomeContainingIgnoreCase(ricerca);
-            
+
         } else {
             pizzas = repository.findAll();
         }
@@ -81,10 +82,22 @@ public class PizzaController {
         repository.save(formPizza);
         return "redirect:/pizzas";
     }
+
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id) {
         repository.deleteById(id);
         return "redirect:/pizzas";
     }
-    
+
+    // SCONTI PIZZA
+
+    @GetMapping("/{id}/scontiPizza")
+    public String scontiPizza(@PathVariable Integer id, Model model) {
+        ScontiPizza scontiPizza = new ScontiPizza();
+        scontiPizza.setPizza(repository.findById(id).get());
+        model.addAttribute("scontiPizza", scontiPizza);
+
+        return "scontiPizza/create";
+    }
+
 }
