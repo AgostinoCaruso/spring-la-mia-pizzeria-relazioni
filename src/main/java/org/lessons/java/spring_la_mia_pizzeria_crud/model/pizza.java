@@ -1,5 +1,7 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.model;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,21 +16,25 @@ public class Pizza {
 
     public Pizza() {
     }
+    
     public Pizza(Integer id, String nome, String immagine, float prezzo) {
         this.id = id;
         this.nome = nome;
         this.immagine = immagine;
         this.prezzo = prezzo;
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Integer id;
 
+    @UniqueElements
     @NotBlank(message = "Il nome non può essere vuoto")
     private String nome;
+
     @NotBlank(message = "L'immagine non può essere vuota")
     private String immagine;
+
     @NotNull(message = "Il prezzo non può essere minore di 0")
     private float prezzo;
 

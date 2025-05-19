@@ -23,12 +23,13 @@ public class PizzaController {
 
     @Autowired
     private PizzaRepository repository;
-
+    
     @GetMapping
     public String index(@RequestParam(name = "ricerca", required = false) String ricerca, Model model) {
         List<Pizza> pizzas;
         if (ricerca != null && !ricerca.isEmpty()) {
             pizzas = repository.findByNomeContainingIgnoreCase(ricerca);
+            
         } else {
             pizzas = repository.findAll();
         }
