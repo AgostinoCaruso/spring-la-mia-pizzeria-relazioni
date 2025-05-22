@@ -34,6 +34,7 @@
                             <th scope="col">Immagine</th>
                             <th scope="col">Prezzo</th>
                             <th scope="col"></th>
+                            <th scope="col">N~</th>
                             <th scope="col"></th>
                             <th scope="col"></th>
                             <th scope="col"></th>
@@ -50,8 +51,11 @@
 
                             <td><span th:text="*{prezzo}"> </span> €</td>
                             <td>
-                                <a th:href="@{/pizzas/{id}/scontiPizza(id=*{id})}" class="btn btn-outline-primary">Sconti</a>
+                                <a th:href="@{/pizzas/{id}/scontiPizza(id=*{id})}"
+                                    class="btn btn-outline-primary">Sconti</a>
                             </td>
+                            <td><span th:text="*{getScontiPizzas().size()}"></span></td>
+
                             <td>
                                 <a th:href="@{/pizzas/{id}(id=*{id})}" class="btn btn-success">Dettagli</a>
                             </td>

@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "scontiPizzas")
@@ -32,10 +33,10 @@ public class ScontiPizza {
     @NotBlank(message = "Va insirito un titolo per lo sconto!")
     private String titolo;
 
-    @NotBlank(message = "Deve avere una data d'inizio")
+    @NotNull(message = "Deve avere una data d'inizio")
     private LocalDate scontoInizioData;
 
-    @NotBlank(message = "Deve avere una data di fine")
+    @NotNull(message = "Deve avere una data di fine")
     private LocalDate scontoFineData;
 
     public Integer getId() {

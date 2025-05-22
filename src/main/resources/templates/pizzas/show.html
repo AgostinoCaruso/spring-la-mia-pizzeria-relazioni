@@ -16,10 +16,10 @@
             <a th:href="@{/pizzas}" class="btn btn-primary">Torna alla lista</a>
         </div>
         <h1 th:text="${pizza.nome}"></h1>
-        <section class="row">
+        <section class="row" th:object="${pizza}">
 
             <div class="col-4">
-                <th:block class="col-md-4 mb-4" th:object="${pizza}">
+                <th:block class="col-md-4 mb-4">
                     <div class="card h-100">
                         <img th:src="*{immagine}" class="card-img-top" alt="Immagine di *{nome}">
                         <div class="card-body">
@@ -27,9 +27,33 @@
                             <p class="card-text">Prezzo: <span th:text="*{prezzo}"></span> €</p>
                         </div>
                 </th:block>
+            </div>
 
+        </section>
+        <section class="row w-50 d-flex flex-column justify-content-center align-items-center" style="height: 300px;">
+            <div th:if="${pizza.getScontiPizzas().size() > 0}">
+                <!-- Intestazione tabella -->
+                <div class="d-flex justify-content-start w-100 fw-bold border-bottom pb-2 mb-2">
+                    <p class="me-5 mb-0">Titolo</p>
+                    <p class="me-5 mb-0">Data inizio</p>
+                    <p class="me-5 mb-0">Data fine</p>
+                    <p class="mb-0"></p>
+                </div>
+
+                <!-- Dati -->
+                <div class="mb-2 d-flex justify-content-start w-100" th:each="sconto : ${pizza.getScontiPizzas()}">
+                    <p class="me-5 mb-0" th:text="${sconto.getTitolo()}"></p>
+                    <p class="me-5 mb-0" th:text="${sconto.scontoInizioData}"></p>
+                    <p class="me-5 mb-0" th:text="${sconto.scontoFineData}"></p>
+                    <a th:href="@{/scontiPizza/edit/{id}(id=${sconto.id})}" class="btn btn-primary">Aggiorna</a>
+                </div>
+            </div>
+
+            <div th:unless="${pizza.getScontiPizzas().size() > 0 }">
+                <div class="alert alert-warning">Non ci sono sconti per la pizza!</div>
             </div>
         </section>
+
         <div th:replace="~{fragments :: footer}"></div>
     </main>
 </body>

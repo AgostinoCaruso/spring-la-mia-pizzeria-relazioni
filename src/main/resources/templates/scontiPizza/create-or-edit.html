@@ -11,46 +11,66 @@
     <header>
         <!-- <div th:replace="~{fragments :: navbar}"></div> -->
     </header>
+
     <main class="container" th:object="${scontiPizza}">
         <div class="mb-3 mt-3">
             <a th:href="@{/pizzas}" class="btn btn-primary">Torna alla lista</a>
         </div>
-        <h1>Crea un nuovo sconto per la pizza <span class="fw-bold">"[[*{pizza.getNome()}]]"</span> </h1>
-        <form th:action="@{/scontiPizza/create}" method="post">
+
+        <h1>
+            <span th:if="${edit}" th:text="'Modifica sconto per ' + *{pizza.nome}">Modifica</span>
+            <span th:unless="${edit}" th:text="'Crea un nuovo sconto per ' + *{pizza.nome}">Crea</span>
+        </h1>
+
+        <form th:action="${edit} ? @{/scontiPizza/edit/{id}(id=*{id})} : @{/scontiPizza/create}" method="post">
+            <!-- Passa solo l'ID della pizza -->
+            <input type="hidden" name="pizza.id" th:field="*{pizza.id}" />
+
             <div class="mb-3">
-                <label for="titolo" class="form-label">titolo</label>
-                <input type="text" class="form-control" id="titolo" name="titolo" th:field="*{titolo}"
-                    th:errorClass="is-invalid" />
+                <label for="titolo" class="form-label">Titolo</label>
+                <input type="text" class="form-control" id="titolo" th:field="*{titolo}" th:errorClass="is-invalid" />
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('titolo')}">
                     <ul>
                         <li th:each="error: ${#fields.errors('titolo')}" th:text="${error}"></li>
                     </ul>
                 </div>
             </div>
-            
+
             <div class="mb-3">
                 <label for="scontoInizioData" class="form-label">Data inizio sconto</label>
-                <input type="date" step="0.01" class="form-control" id="scontoInizioData" name="scontoInizioData" th:field="*{scontoInizioData}" th:errorClass="is-invalid"/>
+                <input type="date" class="form-control" id="scontoInizioData" name="scontoInizioData"
+                    th:value="*{scontoInizioData != null ? scontoInizioData.toString() : ''}"
+                    th:errorClass="is-invalid" />
+
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('scontoInizioData')}">
                     <ul>
                         <li th:each="error: ${#fields.errors('scontoInizioData')}" th:text="${error}"></li>
                     </ul>
                 </div>
             </div>
-               <div class="mb-3">
+
+            <div class="mb-3">
                 <label for="scontoFineData" class="form-label">Data fine sconto</label>
-                <input type="date" step="0.01" class="form-control" id="scontoFineData" name="scontoFineData" th:field="*{scontoFineData}" th:errorClass="is-invalid"/>
+                <input type="date" class="form-control" id="scontoFineData" name="scontoFineData"
+                    th:value="*{scontoFineData != null ? scontoFineData.toString() : ''}" th:errorClass="is-invalid" />
+
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('scontoFineData')}">
                     <ul>
                         <li th:each="error: ${#fields.errors('scontoFineData')}" th:text="${error}"></li>
                     </ul>
                 </div>
             </div>
+
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Aggiungi sconto a [[*{pizza.nome}]]</button>
+                <button type="submit" class="btn btn-primary">
+                    <span
+                        th:text="${edit} ? 'Aggiorna sconto per ' + *{pizza.nome} : 'Aggiungi sconto a ' + *{pizza.nome}"></span>
+                </button>
                 <button type="reset" class="btn btn-warning">Resetta i campi per [[*{pizza.nome}]]</button>
             </div>
-            <div th:replace="~{fragments :: footer}"></div>
+        </form>
+
+        <div th:replace="~{fragments :: footer}"></div>
     </main>
 </body>
 
