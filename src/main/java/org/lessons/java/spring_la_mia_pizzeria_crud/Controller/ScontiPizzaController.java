@@ -1,6 +1,6 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.Controller;
 
-
+import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.ScontiPizza;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.ScontiPizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,9 +40,9 @@ public class ScontiPizzaController {
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {
 
-            model.addAttribute("scontiPizza", repository.findById(id).get());
-            model.addAttribute("edit", true);
-            return "scontiPizza/create-or-edit";
+        model.addAttribute("scontiPizza", repository.findById(id).get());
+        model.addAttribute("edit", true);
+        return "scontiPizza/create-or-edit";
     }
 
     // Modifica: aggiorna e salva
@@ -57,5 +57,12 @@ public class ScontiPizzaController {
 
         repository.save(formScontiPizza);
         return "redirect:/pizzas/" + formScontiPizza.getPizza().getId();
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+
+        repository.deleteById(id);
+        return "redirect:/pizzas";
     }
 }

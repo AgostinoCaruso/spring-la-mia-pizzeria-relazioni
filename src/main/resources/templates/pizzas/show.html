@@ -46,6 +46,10 @@
                     <p class="me-5 mb-0" th:text="${sconto.scontoInizioData}"></p>
                     <p class="me-5 mb-0" th:text="${sconto.scontoFineData}"></p>
                     <a th:href="@{/scontiPizza/edit/{id}(id=${sconto.id})}" class="btn btn-primary">Aggiorna</a>
+                    <form class="d-inline-block" th:action="@{/scontiPizza/delete/{id}(id=${sconto.id})}" method="post">
+                        <button type="submit" class="btn btn-danger">Elimina</button>
+                    </form>
+
                 </div>
             </div>
 
