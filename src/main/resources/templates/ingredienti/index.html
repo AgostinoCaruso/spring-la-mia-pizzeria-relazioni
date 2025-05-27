@@ -40,7 +40,7 @@
                         <tr th:each="ingrediente : ${ingredienti}" th:object="${ingrediente}">
                             <td th:text="*{id}"></td>
                             <td th:text="*{nome}"></td>
-                            <td th:text="*{pizzeCollegate}"></td>
+                            <td th:text="*{pizze.size()}"></td>
                             <td>
                                 <a th:href="@{/ingredienti/{id}(id=*{id})}" class="btn btn-success">Dettagli</a>
                             </td>

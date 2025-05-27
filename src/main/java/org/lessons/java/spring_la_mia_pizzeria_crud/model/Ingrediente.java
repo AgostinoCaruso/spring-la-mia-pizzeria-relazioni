@@ -21,12 +21,12 @@ public class Ingrediente {
     @NotBlank(message = "Un ingrediente deve avere un nome")
     private String nome;
 
+    
+        public Ingrediente() {
+    
+        }
 
     private Integer pizzeCollegate;
-
-    public Ingrediente() {
-
-    }
 
     public Integer getPizzeCollegate() {
         return this.pizzeCollegate;
