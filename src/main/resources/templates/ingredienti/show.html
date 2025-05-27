@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" />
+    <title>Pizzeria</title>
+</head>
+
+<body>
+    <header>
+    </header>
+    <main class="container">
+        <div class="mb-3 mt-3">
+            <a th:href="@{/pizzas}" class="btn btn-primary">Torna alla lista</a>
+        </div>
+        <h1 th:text="${ingrediente.nome}"></h1>
+
+        <section class="row w-50 d-flex flex-column justify-content-center align-items-center" style="height: 300px;"
+            th:object="${ingrediente}">
+            <div>
+                <div class="d-flex justify-content-start w-100 fw-bold border-bottom pb-2 mb-2">
+                    <p class="me-5 mb-0">Nome</p>
+                    <p class="me-5 mb-0">Numero pizze con quest ingrediente</p>
+                </div>
+
+                <div class="mb-2 d-flex justify-content-start w-100">
+                    <p class="me-5 mb-0" th:text="*{nome}"></p>
+                    <th:block th:if="*{pizzeCollegate != null and pizzeCollegate.size() > 0}">
+                        <p class="me-5 mb-0" th:text="*{pizzeCollegate.size()}"></p>
+                    </th:block>
+                    <th:block th:unless="*{pizzeCollegate != null and pizzeCollegate.size() > 0}">
+                        <p class="me-5 mb-0" th:text="'ancora nulla..'"></p>
+                    </th:block>
+
+                </div>
+            </div>
+        </section>
+
+        <div th:replace="~{fragments :: footer}"></div>
+    </main>
+</body>
+
+</html>

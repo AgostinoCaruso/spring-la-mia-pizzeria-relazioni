@@ -22,9 +22,18 @@ public class Ingrediente {
     private String nome;
 
 
-    public Ingrediente(Integer id, String nome) {
-        this.id = id;
-        this.nome = nome;
+    private Integer pizzeCollegate;
+
+    public Ingrediente() {
+
+    }
+
+    public Integer getPizzeCollegate() {
+        return this.pizzeCollegate;
+    }
+
+    public void setPizzeCollegate(Integer pizzeCollegate) {
+        this.pizzeCollegate = pizzeCollegate;
     }
 
     public Integer getId() {
@@ -45,5 +54,15 @@ public class Ingrediente {
 
     @ManyToMany(mappedBy = "ingredienti")
     private List<Pizza> pizze;
+
+
+    public List<Pizza> getPizze() {
+        return this.pizze;
+    }
+
+    public void setPizze(List<Pizza> pizze) {
+        this.pizze = pizze;
+    }
+
 }
 
