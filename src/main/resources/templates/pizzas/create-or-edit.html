@@ -15,8 +15,13 @@
         <div class="mb-3 mt-3">
             <a th:href="@{/pizzas}" class="btn btn-primary">Torna alla lista</a>
         </div>
-        <h1>Crea una nuova pizza</h1>
-        <form th:action="@{/pizzas/create}" method="post" th:object="${pizza}">
+
+        <h1>
+            <span th:if="${edit}" th:text="'Aggiorna la ' + ${pizza.nome}"></span>
+            <span th:unless="${edit}" th:text="'Crea una nuova pizza'"></span>
+        </h1>
+        <form th:action="${edit} ? @{/pizzas/edit/{id}(id=*{id})} : @{/pizzas/create}" method="post"
+            th:object="${pizza}">
             <div class="mb-3">
                 <label for="nome" class="form-label">Nome</label>
                 <input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}"
@@ -29,7 +34,8 @@
             </div>
             <div class="mb-3">
                 <label for="immagine" class="form-label">Immagine</label>
-                <input type="text" class="form-control" id="immagine" name="immagine" th:field="*{immagine}" th:errorClass="is-invalid"/>
+                <input type="text" class="form-control" id="immagine" name="immagine" th:field="*{immagine}"
+                    th:errorClass="is-invalid" />
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('immagine')}">
                     <ul>
                         <li th:each="error: ${#fields.errors('immagine')}" th:text="${error}"></li>
@@ -38,7 +44,8 @@
             </div>
             <div class="mb-3">
                 <label for="prezzo" class="form-label">Prezzo</label>
-                <input type="number" step="0.01" class="form-control" id="prezzo" name="prezzo" th:field="*{prezzo}" th:errorClass="is-invalid"/>
+                <input type="number" step="0.01" class="form-control" id="prezzo" name="prezzo" th:field="*{prezzo}"
+                    th:errorClass="is-invalid" />
                 <div class="invalid-feedback" th:if="${#fields.hasErrors('prezzo')}">
                     <ul>
                         <li th:each="error: ${#fields.errors('prezzo')}" th:text="${error}"></li>
@@ -46,7 +53,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-primary">Crea una pizza</button>
+                <button type="submit" class="btn btn-primary">Salva la pizza</button>
                 <button type="reset" class="btn btn-warning">Resetta i campi</button>
             </div>
             <div th:replace="~{fragments :: footer}"></div>

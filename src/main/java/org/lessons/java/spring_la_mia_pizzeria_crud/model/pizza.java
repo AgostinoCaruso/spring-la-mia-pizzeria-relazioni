@@ -8,6 +8,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinColumns;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -31,7 +35,7 @@ public class Pizza {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @UniqueElements
+    //@UniqueElements
     @NotBlank(message = "Il nome non può essere vuoto")
     private String nome;
 
@@ -84,9 +88,26 @@ public class Pizza {
         this.scontiPizzas = scontiPizzas;
     }
 
+    @ManyToMany
+    @JoinTable(
+        name = "ingrediente_pizza",
+        joinColumns = @JoinColumn(name = "pizza_id"),
+        inverseJoinColumns = @JoinColumn(name = "ingrediente_id")
+    )
+    private List<Ingrediente> ingredienti;
+
     @Override
     public String toString() {
         return String.format("Pizza nome %s, prezzo: %s", nome, prezzo);
     }
+
+    public List<Ingrediente> getIngredienti() {
+        return this.ingredienti;
+    }
+
+    public void setIngredienti(List<Ingrediente> ingredienti) {
+        this.ingredienti = ingredienti;
+    }
+
 }
 
