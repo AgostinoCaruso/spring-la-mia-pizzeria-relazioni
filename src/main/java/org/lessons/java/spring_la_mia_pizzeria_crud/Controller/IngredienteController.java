@@ -1,6 +1,7 @@
 package org.lessons.java.spring_la_mia_pizzeria_crud.Controller;
 
 import org.lessons.java.spring_la_mia_pizzeria_crud.model.Ingrediente;
+import org.lessons.java.spring_la_mia_pizzeria_crud.model.Pizza;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.IngredienteRepository;
 import org.lessons.java.spring_la_mia_pizzeria_crud.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,5 +81,17 @@ public class IngredienteController {
 
         return "redirect:/ingredienti";
     }
+    
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id){
 
+        Ingrediente ingredienteDaCancellare = ingredienteRepository.findById(id).get();
+
+        for(Pizza pizzaCollegata : ingredienteDaCancellare.getPizze()){
+            pizzaCollegata.getIngredienti().remove(ingredienteDaCancellare);
+        }
+
+        ingredienteRepository.delete(ingredienteDaCancellare);
+        return "redirect:/ingredienti";
+    }
 }

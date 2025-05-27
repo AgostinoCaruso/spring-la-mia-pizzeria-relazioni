@@ -57,7 +57,23 @@
                 <div class="alert alert-warning">Non ci sono sconti per la pizza!</div>
             </div>
         </section>
+                <section class="row w-50 d-flex flex-column justify-content-center align-items-center" style="height: 300px;">
+            <div th:if="${pizza.getIngredienti().size() > 0}">
+                <!-- Intestazione tabella -->
+                <div class="d-flex justify-content-start w-100 fw-bold border-bottom pb-2 mb-2">
+                    <p class="me-5 mb-0">Ingrediente</p>
+                </div>
 
+                <!-- Dati -->
+                <div class="mb-2 d-flex justify-content-start w-100" th:each="ingrediente : ${pizza.getIngredienti()}">
+                    <p class="me-5 mb-0" th:text="${ingrediente.nome}"></p>
+                </div>
+            </div>
+
+            <div th:unless="${pizza.getIngredienti().size() > 0}">
+                <div class="alert alert-warning">Non ci sono sconti per la pizza!</div>
+            </div>
+        </section>
         <div th:replace="~{fragments :: footer}"></div>
     </main>
 </body>

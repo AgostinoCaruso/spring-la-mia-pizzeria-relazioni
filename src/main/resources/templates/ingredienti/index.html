@@ -45,7 +45,7 @@
                                 <a th:href="@{/ingredienti/{id}(id=*{id})}" class="btn btn-success">Dettagli</a>
                             </td>
                             <td>
-                                <a th:href="@{/ingredienti/create-or-edit/{id}(id=*{id})}"
+                                <a th:href="@{/ingredienti/edit/{id}(id=*{id})}"
                                     class="btn btn-warning">Aggiorna</a>
                             </td>
                             <td>
@@ -75,7 +75,7 @@
                                                 <button type="button" class="btn btn-secondary"
                                                     data-bs-dismiss="modal">Close</button>
                                                 <form class="d-inline-block"
-                                                    th:action="@{/ingrediente/delete/{id}(id=${ingrediente.id})}"
+                                                    th:action="@{/ingredienti/delete/{id}(id=${ingrediente.id})}"
                                                     method="post">
                                                     <button type="submit" class="btn btn-danger">Delete</button>
                                                 </form>

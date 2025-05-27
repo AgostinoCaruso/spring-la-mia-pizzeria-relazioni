@@ -18,7 +18,7 @@
         </div>
 
         <h1>
-            <span th:if="${edit}" th:text="'Modifica ingrediente'">Modifica</span>
+            <span th:if="${edit}" th:text="'Aggiorna ingrediente ' + ${ingrediente.nome}">Modifica</span>
             <span th:unless="${edit}" th:text="'Crea un nuovo ingrediente'">Crea</span>
         </h1>
 
@@ -37,7 +37,7 @@
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">
                     <span
-                        th:text="${edit} ? 'Aggiorna ingrediente ' + ${ingrediente.nome} : 'Crea ingrediente'"></span>
+                        th:text="${edit} ? 'Aggiorna ingrediente': 'Crea ingrediente'"></span>
                 </button>
                 <button type="reset" class="btn btn-warning">Resetta i campi</button>
             </div>

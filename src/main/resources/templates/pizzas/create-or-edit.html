@@ -52,11 +52,18 @@
                     </ul>
                 </div>
             </div>
+            <div class="form-check" th:each="ingrediente : ${ingredienti}">
+                <input type="checkbox" th:id="|ingrediente-${ingrediente.id}|" th:value="${ingrediente.id}"
+                    th:field="${pizza.ingredienti}">
+                <label th:for="|ingrediente-${ingrediente.id}|" class="form-check-label"
+                    th:text="${ingrediente.nome}"></label>
+            </div>
             <div class="d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Salva la pizza</button>
                 <button type="reset" class="btn btn-warning">Resetta i campi</button>
             </div>
-            <div th:replace="~{fragments :: footer}"></div>
+        </form>
+        <div th:replace="~{fragments :: footer}"></div>
     </main>
 </body>
 
